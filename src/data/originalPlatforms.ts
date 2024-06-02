@@ -1,4 +1,4 @@
-type OriginalPlatform = {
+export type OriginalPlatform = {
   label: string;
   diagonalScreenSize: number;
   resolution: {

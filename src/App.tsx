@@ -22,7 +22,6 @@ function App() {
         }}
       >
         <OriginalPlatformSelect default={consoleKey} onChange={setConsoleKey} />
-        consoleKey: {consoleKey}
         <EmulationHardwareSelect default={deviceKey} onChange={setDeviceKey}/>
       </div>
       <DeviceScreen deviceKey={deviceKey} originalPlatformKey={consoleKey} />

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { originialPlatforms } from '../data/originalPlatforms';
 import { emulationHardware } from '../data/emulationHardware';
+import { getEmulatedScreenInfo } from './EmulatedScreen/helpers';
 
 export const getScreenDimensions = (
   diagonalSize: number,
@@ -41,11 +42,22 @@ export const DeviceScreen: React.FC<Props> = ({
     newDevice.resolution.vertical
   );
 
-  const { sizeX: consoleX, sizeY: consoleY } = getScreenDimensions(
-    originalPlatform.diagonalScreenSize,
-    originalPlatform.resolution.horizontal,
-    originalPlatform.resolution.vertical
-  );
+  // const { sizeX: consoleX, sizeY: consoleY } = getScreenDimensions(
+  //   originalPlatform.diagonalScreenSize,
+  //   originalPlatform.resolution.horizontal,
+  //   originalPlatform.resolution.vertical
+  // );
+
+  const emulatedScreenInfo = getEmulatedScreenInfo({
+    console: originalPlatform,
+    container: {resolutionX: newDevice.resolution.horizontal, resolutionY: newDevice.resolution.vertical, sizeX: devX, sizeY: devY},
+    emulationSettings: {
+      intergerScalling: true,
+      overscan: false,
+    }
+  })
+
+  console.log(emulatedScreenInfo);
 
   return (
     <div
@@ -61,8 +73,8 @@ export const DeviceScreen: React.FC<Props> = ({
           marginLeft: 'auto',
           margin: 'auto',
           backgroundColor: 'lightcoral',
-          width: consoleX,
-          height: consoleY,
+          width: emulatedScreenInfo.sizeX,
+          height: emulatedScreenInfo.sizeY,
         }}
       />
     </div>
