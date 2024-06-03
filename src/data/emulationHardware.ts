@@ -1,4 +1,4 @@
-type EmulationHardware = {
+type SBC = {
   label: string;
   diagonalScreenSize: number;
   resolution: {
@@ -8,11 +8,11 @@ type EmulationHardware = {
   brand: string;
 };
 
-export type EmulationHardwareKey = 'rgb30' | 'rg350m' | 'rp3p';
+export type SBCKey = 'rgb30' | 'rg350m' | 'rp3p';
 
-export const emulationHardware: Record<
-  EmulationHardwareKey,
-  EmulationHardware
+export const sbcDevices: Record<
+  SBCKey,
+  SBC
 > = {
   rgb30: {
     label: 'RGB30',

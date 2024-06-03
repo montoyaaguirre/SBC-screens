@@ -1,4 +1,5 @@
 import { OriginalPlatform } from "../../data/originalPlatforms"
+import { getScreenArea } from "../../utils/screenArea"
 import { EmulationSettings, EmulatorContainer } from "./types"
 
 type Options = {
@@ -11,6 +12,7 @@ export type EmulatedScreenInfo = {
     areaScale: number,
     sizeX: number,
     sizeY: number,
+    sizeD: number,
     resolutionScale: number,
 }
 
@@ -31,11 +33,19 @@ export const getEmulatedScreenInfo = (options: Options): EmulatedScreenInfo => {
 
     const scaledResolution = {x: maxIntegerScaleFactor * consoleInfo.resolution.horizontal, y: maxIntegerScaleFactor * consoleInfo.resolution.vertical}
     
+    const sizeX = (scaledResolution.x / container.resolutionX) * container.sizeX;
+    const sizeY = (scaledResolution.y / container.resolutionY) * container.sizeY;
+    const sizeD = Math.sqrt(Math.pow(sizeX, 2) + Math.pow(sizeY, 2))
+    const area = sizeX * sizeY;
+
+    const originalPlatformArea = getScreenArea(consoleInfo.diagonalScreenSize, consoleInfo.resolution.horizontal, consoleInfo.resolution.vertical);
+
     return {
+        sizeX,
+        sizeY,
+        sizeD,
         resolutionScale: maxIntegerScaleFactor,
-        sizeX: (scaledResolution.x / container.resolutionX) * container.sizeX,
-        sizeY: (scaledResolution.y / container.resolutionY) * container.sizeY,
-        areaScale: 0
+        areaScale: area / originalPlatformArea,
     }
 
 }

@@ -9,7 +9,7 @@ export type OriginalPlatform = {
 
 export type OriginalPlatformKey = 'gb' | 'gba' | 'pokemonMini' | 'wonderSwan';
 
-export const originialPlatforms: Record<OriginalPlatformKey, OriginalPlatform> =
+export const originalPlatforms: Record<OriginalPlatformKey, OriginalPlatform> =
   {
     gb: {
       label: 'Gameboy',

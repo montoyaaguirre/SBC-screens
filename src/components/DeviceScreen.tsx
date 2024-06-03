@@ -1,45 +1,43 @@
 import React from 'react';
 
-import { originialPlatforms } from '../data/originalPlatforms';
-import { emulationHardware } from '../data/emulationHardware';
+import { originalPlatforms } from '../data/originalPlatforms';
+import { sbcDevices } from '../data/emulationHardware';
 import { getEmulatedScreenInfo } from './EmulatedScreen/helpers';
+import { EmulatedScreen } from './EmulatedScreen/EmulatedScreen';
+import { getScreenDimensions } from '../utils/screenDimensions';
 
-export const getScreenDimensions = (
-  diagonalSize: number,
-  resolutionX: number,
-  resolutionY: number
-) => {
-  const sumOfSquares = Math.pow(resolutionX, 2) + Math.pow(resolutionY, 2);
-  const squaredDiagonal = Math.pow(diagonalSize, 2);
+// export const getScreenDimensions = (
+//   diagonalSize: number,
+//   resolutionX: number,
+//   resolutionY: number
+// ) => {
+//   const sumOfSquares = Math.pow(resolutionX, 2) + Math.pow(resolutionY, 2);
+//   const squaredDiagonal = Math.pow(diagonalSize, 2);
 
-  const k = Math.sqrt(squaredDiagonal / sumOfSquares);
+//   const k = Math.sqrt(squaredDiagonal / sumOfSquares);
 
-  const sizeX = resolutionX * k;
-  const sizeY = resolutionY * k;
+//   const sizeX = resolutionX * k;
+//   const sizeY = resolutionY * k;
 
-  return { sizeY, sizeX };
-};
+//   return { sizeY, sizeX };
+// };
 
 type Props = {
-  originalPlatformKey: keyof typeof originialPlatforms;
-  deviceKey: keyof typeof emulationHardware;
+  originalPlatformKey: keyof typeof originalPlatforms;
+  deviceKey: keyof typeof sbcDevices;
 };
 
-export const DeviceScreen: React.FC<Props> = ({
+export const SBCScreen: React.FC<Props> = ({
   originalPlatformKey,
   deviceKey,
 }) => {
-  const originalPlatform = originialPlatforms[originalPlatformKey];
-
-  console.log(originalPlatform);
-
-  const newDevice = emulationHardware[deviceKey];
-  console.log(newDevice);
+  const originalPlatform = originalPlatforms[originalPlatformKey];
+  const sbc = sbcDevices[deviceKey];
 
   const { sizeX: devX, sizeY: devY } = getScreenDimensions(
-    newDevice.diagonalScreenSize,
-    newDevice.resolution.horizontal,
-    newDevice.resolution.vertical
+    sbc.diagonalScreenSize,
+    sbc.resolution.horizontal,
+    sbc.resolution.vertical
   );
 
   // const { sizeX: consoleX, sizeY: consoleY } = getScreenDimensions(
@@ -50,14 +48,12 @@ export const DeviceScreen: React.FC<Props> = ({
 
   const emulatedScreenInfo = getEmulatedScreenInfo({
     console: originalPlatform,
-    container: {resolutionX: newDevice.resolution.horizontal, resolutionY: newDevice.resolution.vertical, sizeX: devX, sizeY: devY},
+    container: {resolutionX: sbc.resolution.horizontal, resolutionY: sbc.resolution.vertical, sizeX: devX, sizeY: devY},
     emulationSettings: {
-      intergerScalling: true,
+      integerScaling: true,
       overscan: false,
     }
   })
-
-  console.log(emulatedScreenInfo);
 
   return (
     <div
@@ -68,15 +64,7 @@ export const DeviceScreen: React.FC<Props> = ({
         display: 'flex',
       }}
     >
-      <div
-        style={{
-          marginLeft: 'auto',
-          margin: 'auto',
-          backgroundColor: 'lightcoral',
-          width: emulatedScreenInfo.sizeX,
-          height: emulatedScreenInfo.sizeY,
-        }}
-      />
+      <EmulatedScreen info={emulatedScreenInfo} originalPlatform={originalPlatform}/>
     </div>
   );
 };

@@ -6,6 +6,6 @@ export type EmulatorContainer = {
 }
 
 export type EmulationSettings = {
-    intergerScalling: boolean,
+    integerScaling: boolean,
     overscan: boolean,
 }

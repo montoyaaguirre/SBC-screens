@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import {
   OriginalPlatformKey,
-  originialPlatforms,
+  originalPlatforms,
 } from '../data/originalPlatforms';
 
 type Props = {
@@ -25,9 +25,9 @@ export const OriginalPlatformSelect: React.FC<Props> = (props) => {
         defaultValue={props.default}
         onChange={onChangeSelection}
       >
-        {Object.keys(originialPlatforms).map((platformKey) => (
+        {Object.keys(originalPlatforms).map((platformKey) => (
           <option value={platformKey}>
-            {originialPlatforms[platformKey as OriginalPlatformKey].label}
+            {originalPlatforms[platformKey as OriginalPlatformKey].label}
           </option>
         ))}
       </select>

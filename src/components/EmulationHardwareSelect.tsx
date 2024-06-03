@@ -1,18 +1,18 @@
 import React, { useCallback } from 'react';
 import {
-  EmulationHardwareKey,
-  emulationHardware,
+  SBCKey,
+  sbcDevices,
 } from '../data/emulationHardware';
 
 type Props = {
-  default: EmulationHardwareKey;
-  onChange: (key: EmulationHardwareKey) => void;
+  default: SBCKey;
+  onChange: (key: SBCKey) => void;
 };
 
 export const EmulationHardwareSelect: React.FC<Props> = (props) => {
   const onChangeSelection = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      props.onChange(event.target.value as EmulationHardwareKey);
+      props.onChange(event.target.value as SBCKey);
     },
     []
   );
@@ -21,10 +21,10 @@ export const EmulationHardwareSelect: React.FC<Props> = (props) => {
     <>
       <label htmlFor="console-select">Device:</label>
       <select id="console-select" onChange={onChangeSelection}>
-        {Object.keys(emulationHardware).map((platformKey) => (
+        {Object.keys(sbcDevices).map((platformKey) => (
           <option key={platformKey} value={platformKey}>
             {
-              emulationHardware[platformKey as keyof typeof emulationHardware]
+              sbcDevices[platformKey as keyof typeof sbcDevices]
                 .label
             }
           </option>
