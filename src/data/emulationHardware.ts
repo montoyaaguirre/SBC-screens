@@ -8,7 +8,7 @@ type SBC = {
   brand: string;
 };
 
-export type SBCKey = 'rgb30' | 'rg350m' | 'rp3p';
+export type SBCKey = 'rgb30' | 'rg350m' | 'rp3p' | 'rgNano';
 
 export const sbcDevices: Record<
   SBCKey,
@@ -31,5 +31,11 @@ export const sbcDevices: Record<
     diagonalScreenSize: 470,
     resolution: { horizontal: 1334, vertical: 750 },
     brand: 'Retroid',
+  },
+  rgNano: {
+    label: 'RG Nano',
+    diagonalScreenSize: 154,
+    resolution: { horizontal: 240, vertical: 240 },
+    brand: 'ANBERNIC',
   },
 } as const;

@@ -1,16 +1,17 @@
 export type OriginalPlatform = {
   label: string;
-  diagonalScreenSize: number;
+  diagonalScreenSize?: number;
   resolution: {
     vertical: number;
     horizontal: number;
   };
 };
 
-export type OriginalPlatformKey = 'gb' | 'gba' | 'pokemonMini' | 'wonderSwan';
+export type OriginalPlatformKey = 'gb' | 'gba' | 'pokemonMini' | 'wonderSwan' | 'pico8' | 'snes';
 
 export const originalPlatforms: Record<OriginalPlatformKey, OriginalPlatform> =
   {
+    // Handheld consoles
     gb: {
       label: 'Gameboy',
       diagonalScreenSize: 250,
@@ -31,4 +32,14 @@ export const originalPlatforms: Record<OriginalPlatformKey, OriginalPlatform> =
       diagonalScreenSize: 249,
       resolution: { horizontal: 224, vertical: 144 },
     },
+    // Virtual consoles
+    pico8: {
+      label: 'PICO-8',
+      resolution: { horizontal: 128, vertical: 128 },
+    },
+    // Home consoles
+    snes: {
+      label: 'Super Nintendo',
+      resolution: {horizontal: 256, vertical: 224}
+    }
   } as const;
