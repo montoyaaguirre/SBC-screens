@@ -2,34 +2,20 @@ import React from 'react';
 
 import { originalPlatforms } from '../data/originalPlatforms';
 import { sbcDevices } from '../data/emulationHardware';
-import { getEmulatedScreenInfo } from './EmulatedScreen/helpers';
+import { calculateScreenPortionDimensions, scaleContentResolution } from './EmulatedScreen/helpers';
 import { EmulatedScreen } from './EmulatedScreen/EmulatedScreen';
 import { getScreenDimensions } from '../utils/screenDimensions';
-
-// export const getScreenDimensions = (
-//   diagonalSize: number,
-//   resolutionX: number,
-//   resolutionY: number
-// ) => {
-//   const sumOfSquares = Math.pow(resolutionX, 2) + Math.pow(resolutionY, 2);
-//   const squaredDiagonal = Math.pow(diagonalSize, 2);
-
-//   const k = Math.sqrt(squaredDiagonal / sumOfSquares);
-
-//   const sizeX = resolutionX * k;
-//   const sizeY = resolutionY * k;
-
-//   return { sizeY, sizeX };
-// };
 
 type Props = {
   originalPlatformKey: keyof typeof originalPlatforms;
   deviceKey: keyof typeof sbcDevices;
+  integerScaling: boolean
 };
 
 export const SBCScreen: React.FC<Props> = ({
   originalPlatformKey,
   deviceKey,
+  integerScaling,
 }) => {
   const originalPlatform = originalPlatforms[originalPlatformKey];
   const sbc = sbcDevices[deviceKey];
@@ -40,20 +26,9 @@ export const SBCScreen: React.FC<Props> = ({
     sbc.resolution.vertical
   );
 
-  // const { sizeX: consoleX, sizeY: consoleY } = getScreenDimensions(
-  //   originalPlatform.diagonalScreenSize,
-  //   originalPlatform.resolution.horizontal,
-  //   originalPlatform.resolution.vertical
-  // );
+  const { w, h } = scaleContentResolution(sbc.resolution.horizontal, sbc.resolution.vertical, originalPlatform.resolution.horizontal, originalPlatform.resolution.vertical, integerScaling);
+  const { diagonal: sizeD, height: sizeY, width: sizeX } = calculateScreenPortionDimensions(sbc.resolution.horizontal, sbc.resolution.vertical, sbc.diagonalScreenSize, w, h);
 
-  const emulatedScreenInfo = getEmulatedScreenInfo({
-    console: originalPlatform,
-    container: {resolutionX: sbc.resolution.horizontal, resolutionY: sbc.resolution.vertical, sizeX: devX, sizeY: devY},
-    emulationSettings: {
-      integerScaling: true,
-      overscan: false,
-    }
-  })
 
   return (
     <div
@@ -64,7 +39,7 @@ export const SBCScreen: React.FC<Props> = ({
         display: 'flex',
       }}
     >
-      <EmulatedScreen info={emulatedScreenInfo} originalPlatform={originalPlatform}/>
+      <EmulatedScreen info={{ sizeX, sizeY, sizeD, areaScale: 0, resolutionScale: 0 }} originalPlatform={originalPlatform} />
     </div>
   );
 };
