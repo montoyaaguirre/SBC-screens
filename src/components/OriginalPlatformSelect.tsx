@@ -19,7 +19,7 @@ export const OriginalPlatformSelect: React.FC<Props> = (props) => {
 
   return (
     <>
-      <label htmlFor="console-select">Console:</label>
+      <label htmlFor="console-select">Emulated Console:</label>
       <select
         id="console-select"
         defaultValue={props.default}

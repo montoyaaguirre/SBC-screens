@@ -19,7 +19,7 @@ export const EmulationHardwareSelect: React.FC<Props> = (props) => {
 
   return (
     <>
-      <label htmlFor="console-select">Device:</label>
+      <label htmlFor="console-select">Physical Device:</label>
       <select id="console-select" onChange={onChangeSelection}>
         {Object.keys(sbcDevices).map((platformKey) => (
           <option key={platformKey} value={platformKey}>
