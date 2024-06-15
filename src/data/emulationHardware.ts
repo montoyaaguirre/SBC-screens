@@ -17,7 +17,7 @@ export type SBCKey = OtherSBCKey | AnbernicSBCKey | PowkiddySBCKey| RetroidPocke
 type AnbernicSBCKey = 'rgCube' | 'rg35xxsp' | 'rg28xx' | 'rg556';
 
 
-type AYNSBCKey = 'odin' | 'odin2' | 'odinLite' | 'odin2Mini';
+// type AYNSBCKey = 'odin' | 'odin2' | 'odinLite' | 'odin2Mini';
 type OtherSBCKey =  'ap' | 'ds' ;
 
 export const sbcDevices: Record<
