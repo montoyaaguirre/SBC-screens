@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import {
   SBCKey,
   sbcDevices,
-} from '../data/emulationHardware';
+} from '../../data/emulationHardware';
 
 type Props = {
   default: SBCKey;
