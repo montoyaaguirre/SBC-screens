@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { OriginalPlatformKey } from "../../data/originalPlatforms";
 import { SBCKey } from "../../data/emulationHardware";
-import { OriginalPlatformSelect } from "../OriginalPlatformSelect";
 import { SBCScreen } from "../DeviceScreen";
 import { EmulationHardwareSelectV2 } from "../EmulationHardwareSelect/EmulationHardwareSelectV2";
+import { OriginalPlatformSelectV2 } from "../OriginalPlatformSelectV2";
 
 export const Workspace: React.FC = () => {
     const [consoleKey, setConsoleKey] = useState<OriginalPlatformKey>('gb');
@@ -21,7 +21,7 @@ export const Workspace: React.FC = () => {
                         marginBottom: '16px',
                     }}
                 >
-                    <OriginalPlatformSelect default={consoleKey} onChange={setConsoleKey} />
+                    <OriginalPlatformSelectV2 default={consoleKey} onChange={setConsoleKey} />
                     <div style={{ display: 'flex', gap: '8px' }}>
                         <label htmlFor="integer-scale">Integer Scale</label>
                         <input type="checkbox" id="integer-scale" name="integer-scale" checked={integerScaling} onChange={(event) => setIntegerScaling(event.target.checked)} />

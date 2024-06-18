@@ -1,24 +1,24 @@
 import React, { useCallback } from 'react';
 import {
-  SBCKey,
-  sbcDevices,
-} from '../../data/emulationHardware';
+  OriginalPlatformKey,
+  originalPlatforms,
+} from '../data/originalPlatforms';
 
 import * as Select from '@radix-ui/react-select';
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
-import './styles.css';
-import { SelectItem } from './SelectItem';
+import './EmulationHardwareSelect/styles.css'
+import { SelectItem } from './EmulationHardwareSelect/SelectItem';
 
 type Props = {
-  default: SBCKey;
-  onChange: (key: SBCKey) => void;
+  default: OriginalPlatformKey;
+  onChange: (key: OriginalPlatformKey) => void;
 };
 
-export const EmulationHardwareSelectV2: React.FC<Props> = (props) => {
+export const OriginalPlatformSelectV2: React.FC<Props> = (props) => {
 
   const onChangeSelection = useCallback(
     (selection: string) => {
-      props.onChange(selection as SBCKey);
+      props.onChange(selection as OriginalPlatformKey);
     },
     []
   );
@@ -37,9 +37,9 @@ export const EmulationHardwareSelectV2: React.FC<Props> = (props) => {
             <ChevronUpIcon />
           </Select.ScrollUpButton>
           <Select.Viewport className="SelectViewport">
-            {Object.keys(sbcDevices).map((platformKey) => (
+            {Object.keys(originalPlatforms).map((platformKey) => (
               <SelectItem className='SelectItem' key={platformKey} value={platformKey}>
-                {sbcDevices[platformKey as keyof typeof sbcDevices].label}
+                {originalPlatforms[platformKey as keyof typeof originalPlatforms].label}
               </SelectItem>
             ))}
           </Select.Viewport>
