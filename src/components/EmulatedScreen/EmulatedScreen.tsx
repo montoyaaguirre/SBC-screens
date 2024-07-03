@@ -12,13 +12,13 @@ export const EmulatedScreen: React.FC<Props> = ({ info }) => {
 
   return <div
     style={{
-      marginLeft: 'auto',
-      margin: 'auto',
-      backgroundColor: '#004643',
+      borderColor: '#BB86FC',
+      borderWidth: '1px',
       width: info.sizeX,
       height: info.sizeY,
-      color: '#abd1c6',
+      color: '#BB86FC',
       textAlign: 'end',
+      border: 'dashed',
     }}
   >
     <div style={{ margin: '8px' }}>

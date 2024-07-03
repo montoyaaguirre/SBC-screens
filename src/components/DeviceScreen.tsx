@@ -37,10 +37,14 @@ export const SBCScreen: React.FC<Props> = ({
   return (
     <div
       style={{
-        backgroundColor: 'black',
+        borderWidth: '1px',
+        borderColor: '#BB86FC',
         width: devX,
         height: devY,
         display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        border: 'dashed'
       }}
     >
       <EmulatedScreen info={{ sizeX, sizeY, sizeD, areaScale: contentArea / originalPlatformArea, resolutionScale: resolutionScale }} originalPlatform={originalPlatform} />
