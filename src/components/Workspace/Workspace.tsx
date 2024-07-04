@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { OriginalPlatformKey } from "../../data/originalPlatforms";
 import { SBCKey } from "../../data/emulationHardware";
 import { OriginalPlatformSelect } from "../OriginalPlatformSelect";
@@ -8,15 +7,25 @@ import { Route } from "../../routes";
 
 export const Workspace: React.FC = () => {
   const searchParams = Route.useSearch();
-  const [consoleKey, setConsoleKey] = useState<OriginalPlatformKey>(
-    searchParams.console as OriginalPlatformKey
-  );
-  const [deviceKey, setDeviceKey] = useState<SBCKey>(
-    searchParams.device as SBCKey
-  );
-  const [integerScaling, setIntegerScaling] = useState(
-    searchParams.integerScaling
-  );
+  const navigate = Route.useNavigate();
+
+  const handleConsoleChange = (console: string) => {
+    navigate({
+      search: (prev) => ({ ...prev, console }),
+    });
+  };
+
+  const handleIntegerScalingToggle = () => {
+    navigate({
+      search: (prev) => ({ ...prev, integerScaling: !prev.integerScaling }),
+    });
+  };
+
+  const handleDeviceChange = (deviceKey: string) => {
+    navigate({
+      search: (prev) => ({ ...prev, device: deviceKey }),
+    });
+  };
 
   return (
     <div>
@@ -36,8 +45,8 @@ export const Workspace: React.FC = () => {
           }}
         >
           <OriginalPlatformSelect
-            default={consoleKey}
-            onChange={setConsoleKey}
+            default={searchParams.console as OriginalPlatformKey}
+            onChange={handleConsoleChange}
           />
           <div style={{ display: "flex", gap: "8px" }}>
             <label htmlFor="integer-scale">Integer Scale</label>
@@ -45,20 +54,20 @@ export const Workspace: React.FC = () => {
               type="checkbox"
               id="integer-scale"
               name="integer-scale"
-              checked={integerScaling}
-              onChange={(event) => setIntegerScaling(event.target.checked)}
+              checked={searchParams.integerScaling}
+              onChange={handleIntegerScalingToggle}
             />
           </div>
           <EmulationHardwareSelect
-            defaultKey={deviceKey}
-            onChange={setDeviceKey}
+            defaultKey={searchParams.device as SBCKey}
+            onChange={handleDeviceChange}
           />
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <SBCScreen
-            deviceKey={deviceKey}
-            originalPlatformKey={consoleKey}
-            integerScaling={integerScaling}
+            deviceKey={searchParams.device as SBCKey}
+            originalPlatformKey={searchParams.console as OriginalPlatformKey}
+            integerScaling={searchParams.integerScaling}
           />
         </div>
       </div>
