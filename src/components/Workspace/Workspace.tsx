@@ -27,6 +27,12 @@ export const Workspace: React.FC = () => {
     });
   };
 
+  const handleDevice2Change = (deviceKey: string) => {
+    navigate({
+      search: (prev) => ({ ...prev, device2: deviceKey }),
+    });
+  };
+
   return (
     <div>
       <div
@@ -66,6 +72,26 @@ export const Workspace: React.FC = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <SBCScreen
             deviceKey={searchParams.device as SBCKey}
+            originalPlatformKey={searchParams.console as OriginalPlatformKey}
+            integerScaling={searchParams.integerScaling}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            flexDirection: "column",
+            marginBottom: "16px",
+          }}
+        >
+          <EmulationHardwareSelect
+            defaultKey={searchParams.device2 as SBCKey}
+            onChange={handleDevice2Change}
+          />
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <SBCScreen
+            deviceKey={searchParams.device2 as SBCKey}
             originalPlatformKey={searchParams.console as OriginalPlatformKey}
             integerScaling={searchParams.integerScaling}
           />

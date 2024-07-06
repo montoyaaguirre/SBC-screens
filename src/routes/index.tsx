@@ -13,6 +13,10 @@ const workspaceConfigSchema = z.object({
     .catch(ORIGINAL_PLATFORM_KEYS[1]),
   device: z.enum([sbcKeys[0], ...sbcKeys]).catch(sbcKeys[0]),
   integerScaling: z.boolean().catch(true),
+  device2: z
+    .enum([sbcKeys[0], ...sbcKeys])
+    // .optional()
+    .catch(sbcKeys[1]),
 });
 
 export const Route = createFileRoute("/")({
