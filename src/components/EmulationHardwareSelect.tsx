@@ -17,7 +17,7 @@ export const EmulationHardwareSelect: React.FC<Props> = (props) => {
 
   return (
     <>
-      <label htmlFor="console-select">Physical Device:</label>
+      <label htmlFor="console-select">Device:</label>
       <select
         id="console-select"
         onChange={onChangeSelection}
