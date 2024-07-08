@@ -15,7 +15,7 @@ const workspaceConfigSchema = z.object({
   integerScaling: z.boolean().catch(true),
   device2: z
     .enum([sbcKeys[0], ...sbcKeys])
-    // .optional()
+    .optional()
     .catch(sbcKeys[1]),
 });
 
